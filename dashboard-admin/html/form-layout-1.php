@@ -4,23 +4,23 @@
         <small class="text-muted float-end">Default label</small>
     </div>
     <div class="card-body">
-        <form method="post" enctype="multipart/form-data" action="">
+        <form method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label" for="basic-default-fullname">Full Name</label>
-                <input type="text" class="form-control" id="basic-default-fullname" placeholder="John Doe" name="full_name" />
+                <input type="text" class="form-control" id="basic-default-fullname" placeholder="John Doe" name="full_name" value="Chinaza" />
             </div>
             <div class=" input-group mb-3">
                 <input type="file" name="fileToUpload" class="form-control" id="inputGroupFile02" />
                 <label class="input-group-text" for="inputGroupFile02">Upload</label>
             </div>
-            <input type="submit" name="submit" class="btn btn-primary" value="Send" />
+            <input type="submit" name="submit" class="btn btn-primary" value="Submit" />
         </form>
     </div>
 </div>
 
 <?php
 // check if the form's file input was set
-if (isset($_POST["submit"]) && isset($_FILES["fileToUpload"])) {
+if (isset($_POST["submit"])  && isset($_POST["full_name"]) && isset($_FILES["fileToUpload"])) {
     // print file info
     var_dump($_FILES["fileToUpload"]);
     // directory to upload to
@@ -60,6 +60,6 @@ if (isset($_POST["submit"]) && isset($_FILES["fileToUpload"])) {
         $uploadOk = 1;
     }
 } else {
-    echo ("File is empty");
+    echo ("File or Full name is empty");
 }
 ?>
