@@ -40,7 +40,7 @@
         <div class="container-xxl flex-grow-1 container-p-y">
           <div class="mb-5">
             <span>All Posts</span>
-            <a type="button" href="#" class="btn btn-outline-primary  btn-sm ms-3">
+            <a type="button" href="create-post.php" class="btn btn-outline-primary  btn-sm ms-3">
               Create Post
             </a>
             <!-- Search -->

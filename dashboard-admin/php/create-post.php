@@ -67,8 +67,42 @@
                                     <div class="card-body demo-vertical-spacing demo-only-element">
 
                                         <div>
-                                            <label for="exampleFormControlTextarea1" class="form-label">Attach Image</label>
-                                            <input type="file" class="form-control" id="inputGroupFile02">
+                                            <label for="post-image" class="form-label">Attach Image</label>
+                                            <input type="text" class="form-control mb-2" id="defaultFormControlInput" placeholder="Post Image URL" name="post-image-url" aria-describedby="defaultFormControlHelp">
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="mt-3">
+                                                    <!-- Button trigger modal -->
+                                                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal">
+                                                        Choose from library
+                                                    </button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="basicModal" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel1">Choose Image</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+
+                                                                    <div>
+                                                                        <input type="file" class="form-control d-none" id="post-image">
+                                                                        <label type="button" class="btn btn-primary btn-sm mb-2" for="post-image">Upload Image
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="d-flex flex-wrap mt-3" style="gap:1.5rem">
+                                                                        <img src="" style="width:120px;height:120px" />
+                                                                        <img src="" style="width:120px;height:120px" />
+                                                                        <img src="" style="width:120px;height:120px" />
+                                                                        <img src="" style="width:120px;height:120px" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div>
                                             <label for="exampleFormControlTextarea1" class="form-label">Categories</label>
