@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "mydb";
+$dbname = "swiss_blog";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -11,47 +11,20 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+$sql = "CREATE TABLE IF NOT EXISTS posts (
+    id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    post_title VARCHAR(100) NOT NULL,
+    post_content TEXT(30) NOT NULL,
+    post_image_path VARCHAR(100) NOT NULL,
+    category_id INT(2) DEFAULT 0,
+    published_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_modified_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )";
 
-$sql = "SELECT id, firstname, lastname FROM MyGuests WHERE lastname='micheal'";
-$result = mysqli_query($conn, $sql);
-
-if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while ($row = mysqli_fetch_assoc($result)) {
-        echo "id: " . $row["id"] . " - Name: " . $row["firstname"] . " " . $row["lastname"] . "<br>";
-    }
+if (mysqli_query($conn, $sql)) {
+    echo "post table created successfully";
 } else {
-    echo "0 results";
+    echo "Error creating post table: " . mysqli_error($conn);
 }
 
-// // Prepare an insert statement
-// $sql = "INSERT INTO MyGuests (firstname, lastname, email) VALUES (? ,?, ?)";
-// $stmt = mysqli_prepare($conn, $sql);
-// if ($stmt) {
-//     // Bind variables to the prepared statement as parameters
-//     mysqli_stmt_bind_param($stmt, "sss", $firstname, $lastname, $email);
-
-//     /* Set the parameters values and execute
-//     the statement again to insert another row */
-//     $firstname = "Hermione";
-//     $lastname = "Granger";
-//     $email = "hermionegranger@mail.com";
-//     mysqli_stmt_execute($stmt);
-
-//     /* Set the parameters values and execute
-//     the statement to insert a row */
-//     $firstname = "Ron";
-//     $lastname = "Weasley";
-//     $email = "ronweasley@mail.com";
-//     mysqli_stmt_execute($stmt);
-
-//     echo "Records inserted successfully.";
-// } else {
-//     echo "ERROR: Could not prepare query: $sql. " . mysqli_error($conn);
-// }
-
-// // Close statement
-// mysqli_stmt_close($stmt);
-
-// Close connection
 mysqli_close($conn);

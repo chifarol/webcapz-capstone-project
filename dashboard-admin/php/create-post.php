@@ -41,7 +41,14 @@
                     <div class="mb-5">
                         <span>Create Post</span>
                     </div>
+                    <div>
+                        <?php
+                        require('functions/create-post-handler.php')
+                        ?>
+                    </div>
                     <div class="mb-3">
+                        <!-- parent form -->
+                        <form enctype="multipart/form-data" id="create-post-form" method="post"></form>
                         <div class="row">
                             <!-- Basic -->
                             <div class="col-md-7">
@@ -49,14 +56,13 @@
                                     <div class="card-body demo-vertical-spacing demo-only-element">
                                         <div>
                                             <label for="defaultFormControlInput" class="form-label">Post Title</label>
-                                            <input type="text" class="form-control" id="defaultFormControlInput" placeholder="Post Title" name="post-title" aria-describedby="defaultFormControlHelp">
+                                            <input form="create-post-form" type="text" class="form-control" id="defaultFormControlInput" placeholder="Post Title" name="post-title" aria-describedby="defaultFormControlHelp" required>
                                         </div>
                                         <div>
                                             <label for="exampleFormControlTextarea1" class="form-label">Post Content</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+                                            <textarea form="create-post-form" class="form-control" id="exampleFormControlTextarea1" rows="10" name="post-content"></textarea required>
                                         </div>
-                                        <button type="button" class="btn btn-primary">Publish
-                                        </button>
+                                        <input type="submit" name="submit-post" form="create-post-form" class="btn btn-primary" value="Publish" />
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +74,7 @@
 
                                         <div>
                                             <label for="post-image" class="form-label">Attach Image</label>
-                                            <input type="text" class="form-control mb-2" id="defaultFormControlInput" placeholder="Post Image URL" name="post-image-url" aria-describedby="defaultFormControlHelp">
+                                            <input form="create-post-form" type="text" class="form-control mb-2" id="defaultFormControlInput" placeholder="Post Image URL" name="post-image-url" aria-describedby="defaultFormControlHelp" required>
                                             <div class="col-lg-4 col-md-6">
                                                 <div class="mt-3">
                                                     <!-- Button trigger modal -->
@@ -87,7 +93,7 @@
                                                                 <div class="modal-body">
 
                                                                     <div>
-                                                                        <input type="file" class="form-control d-none" id="post-image">
+                                                                        <input type="file" class="form-control d-none" id="post-image" name="post-image" form="create-post-form" accept="image/jpeg, image/png, image/jpg">
                                                                         <label type="button" class="btn btn-primary btn-sm mb-2" for="post-image">Upload Image
                                                                         </label>
                                                                     </div>
@@ -108,43 +114,44 @@
                                             <label for="exampleFormControlTextarea1" class="form-label">Categories</label>
                                             <div>
                                                 <div class="form-check mt-3">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    <input class="form-check-input" type="checkbox" value="American News" id="defaultCheck1" name="category" form="create-post-form">
                                                     <label class="form-check-label" for="defaultCheck1"> American News </label>
                                                 </div>
                                                 <div class="form-check mt-3">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    <input class="form-check-input" type="checkbox" value="Nigerian News" id="defaultCheck1" name="category" form="create-post-form">
                                                     <label class="form-check-label" for="defaultCheck1"> Nigerian News </label>
                                                 </div>
                                                 <div class="form-check mt-3">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    <input class="form-check-input" type="checkbox" value="Sports" id="defaultCheck1" name="category" form="create-post-form">
                                                     <label class="form-check-label" for="defaultCheck1"> Sports </label>
                                                 </div>
                                                 <div class="form-check mt-3 ms-3">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    <input class="form-check-input" type="checkbox" value="Football" id="defaultCheck1" name="category" form="create-post-form">
                                                     <label class="form-check-label" for="defaultCheck1"> Football </label>
                                                 </div>
                                                 <div class="form-check mt-3 ms-3">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    <input class="form-check-input" type="checkbox" value="BasketBall" id="defaultCheck1" name="category" form="create-post-form">
                                                     <label class="form-check-label" for="defaultCheck1"> BasketBall </label>
                                                 </div>
                                                 <div class="form-check mt-3">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    <input class="form-check-input" type="checkbox" value="Entertainment" id="defaultCheck1" name="category" form="create-post-form">
                                                     <label class="form-check-label" for="defaultCheck1"> Entertainment </label>
                                                 </div>
                                             </div>
                                             <!-- add new category -->
                                             <div class="mt-5">
-                                                <input type="text" class="form-control" id="defaultFormControlInput" placeholder="Category Name" name="post-title" aria-describedby="defaultFormControlHelp">
-                                                <select id="defaultSelect" class="form-select mt-2">
+                                                <input type="text" class="form-control" id="defaultFormControlInput" placeholder="Category Name" name="new-category" form="create-post-form" aria-describedby="defaultFormControlHelp">
+
+                                                <select id="defaultSelect" class="form-select mt-2" form="create-post-form" name="parent-category">
                                                     <option>--Parent Category--</option>
                                                     <option value="1">American News</option>
                                                     <option value="2">Sports</option>
                                                     <option value="3">Nigerian News</option>
-                                                    <option value="3">Entertainment</option>
+                                                    <option value="4">Entertainment</option>
                                                 </select>
-                                                <a type="button" href="#" class="btn btn-outline-primary btn-sm mt-3">
+                                                <div type="button" href="#" class="btn btn-outline-primary btn-sm mt-3">
                                                     Add New Category
-                                                </a>
+                                                </div>
                                             </div>
                                             <!--/ add new category -->
                                         </div>
