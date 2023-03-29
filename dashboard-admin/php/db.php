@@ -11,7 +11,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "CREATE TABLE IF NOT EXISTS posts (
+$create_table = "CREATE TABLE IF NOT EXISTS posts (
     id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     post_title VARCHAR(100) NOT NULL,
     post_content TEXT(30) NOT NULL,
@@ -21,10 +21,19 @@ $sql = "CREATE TABLE IF NOT EXISTS posts (
     last_modified_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     )";
 
-if (mysqli_query($conn, $sql)) {
-    echo "post table created successfully";
+if (mysqli_query($conn, $create_table)) {
 } else {
-    echo "Error creating post table: " . mysqli_error($conn);
+    echo "Error creating post table" . mysqli_error($conn);
+    echo "<br>";
 }
+$create_categories = "CREATE TABLE IF NOT EXISTS categories (
+    id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    category_name VARCHAR(100) NOT NULL,
+    parent_category INT(4) UNSIGNED
+    )";
 
-mysqli_close($conn);
+if (mysqli_query($conn, $create_categories)) {
+} else {
+    echo "<br>";
+    echo "Error creating categories table" . mysqli_error($conn);
+}
