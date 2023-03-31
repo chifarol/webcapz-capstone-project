@@ -28,12 +28,24 @@ if (mysqli_query($conn, $create_table)) {
 }
 $create_categories = "CREATE TABLE IF NOT EXISTS categories (
     id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    category_name VARCHAR(100) NOT NULL,
-    parent_category INT(4) UNSIGNED
+    category_name VARCHAR(100) NOT NULL UNIQUE,
+    parent_category_id INT(4) UNSIGNED
     )";
 
 if (mysqli_query($conn, $create_categories)) {
 } else {
     echo "<br>";
     echo "Error creating categories table" . mysqli_error($conn);
+}
+$create_media = "CREATE TABLE IF NOT EXISTS media (
+    id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    media_url VARCHAR(255) NOT NULL UNIQUE,
+    media_type VARCHAR(15),
+    published_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )";
+
+if (mysqli_query($conn, $create_media)) {
+} else {
+    echo "<br>";
+    echo "Error creating media table" . mysqli_error($conn);
 }

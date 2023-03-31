@@ -1,6 +1,6 @@
 <?php
-require('./db.php');
-$error_msg = "";
+$_SESSION['create_post_error_msg'] = "";
+require_once('../db.php');
 if (
     $_SERVER["REQUEST_METHOD"] === "POST"
 ) {
@@ -32,19 +32,20 @@ if (
             );
 
             /* Set the parameters values and execute
-    the statement again to insert another row */
+            the statement again to insert another row */
             $post_title = $_POST['post-title'];
             $post_content = $_POST['post-content'];
             $post_image = $_POST['post-image-url'];
             $post_category = intval($_POST['category']);
 
             if (empty($post_title) || empty($post_content) || empty($post_image)) {
-                $error_msg = "some required fields are missing";
+                $_SESSION['create_post_error_msg'] = "some required fields are missing";
                 return;
             }
             mysqli_stmt_execute($stmt);
-
+            $last_id = mysqli_insert_id($conn);
             echo "Records inserted successfully.";
+            header("Location: /webcapz-capstone-project/dashboard-admin/php/edit-post.php?id=$last_id");
         } else {
             echo "ERROR: Could not prepare post create query: $create_post. " . mysqli_error($conn);
         }
@@ -53,8 +54,9 @@ if (
         mysqli_stmt_close($stmt);
     } else {
         echo ("something went wrong");
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
-} 
+}
 
 
 // if (isset($_POST['submit-post'])) {
