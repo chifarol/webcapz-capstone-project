@@ -27,7 +27,6 @@ $_SESSION['create_post_error_msg'] = ''; ?>
                         <!-- Search -->
                         <form action="" class="navbar-nav align-items-center">
                             <div class="nav-item d-flex align-items-center">
-
                         </form>
                     </div>
             </div>
@@ -45,7 +44,7 @@ $_SESSION['create_post_error_msg'] = ''; ?>
                     </div>
                     <div class="mb-3">
                         <!-- parent form -->
-                        <form enctype="multipart/form-data" id="create-post-form" method="post"
+                        <form id="create-post-form" method="post"
                             action="functions/create-post-handler.php"></form>
                         <div class="row">
                             <!-- Basic -->
@@ -65,9 +64,11 @@ $_SESSION['create_post_error_msg'] = ''; ?>
                                             <label for="exampleFormControlTextarea1" class="form-label">Post
                                                 Content*</label>
                                             <textarea form="create-post-form" class="form-control"
-                                                id="exampleFormControlTextarea1" rows="10" name="post-content"></textarea required>
+                                                id="exampleFormControlTextarea1" rows="10" name="post-content"
+                                                required></textarea>
                                         </div>
-                                        <input type="submit" name="submit-post" form="create-post-form" class="btn btn-primary" value="Publish" />
+                                        <input type="submit" name="submit-post" form="create-post-form"
+                                            class="btn btn-primary" value="Publish" />
                                     </div>
                                 </div>
                             </div>
@@ -79,40 +80,60 @@ $_SESSION['create_post_error_msg'] = ''; ?>
 
                                         <div>
                                             <label for="post-image" class="form-label">Attach Image*</label>
-                                            <input form="create-post-form" type="text" class="form-control mb-2" id="image-upload-url-input" placeholder="Post Image URL" name="post-image-url" aria-describedby="defaultFormControlHelp" required>
+                                            <input form="create-post-form" type="text" class="form-control mb-2"
+                                                id="image-upload-url-input" placeholder="Post Image URL"
+                                                name="post-image-url" aria-describedby="defaultFormControlHelp"
+                                                required>
+                                            <div>
+                                                <img id="post-image" src=''
+                                                    style='width:120px;height:120px;object-fit:cover' />
+                                            </div>
                                             <div class="col-lg-4 col-md-6">
                                                 <div class="mt-3">
                                                     <!-- Button trigger modal -->
-                                                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal">
+                                                    <button type="button" class="btn btn-outline-primary btn-sm"
+                                                        data-bs-toggle="modal" data-bs-target="#basicModal">
                                                         Choose from library
                                                     </button>
 
                                                     <!-- Modal -->
-                                                    <div class="modal fade" id="basicModal" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                    <div class="modal fade" id="basicModal" tabindex="-1"
+                                                        style="display: none;" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel1">Choose Image</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    <h5 class="modal-title" id="exampleModalLabel1">
+                                                                        Choose Image</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <form method="form" enctype="multi-part/form-data" id="image-upload-form">
-                                                                        <input type="file" class="form-control d-none" id="image-upload-input" name="post-image" form="create-post-form" accept="image/jpeg, image/png, image/jpg">
-                                                                        <label type="button" class="btn btn-primary btn-sm mb-2" for="image-upload-input" >Upload Image
+                                                                        <input type="file" class="form-control d-none"
+                                                                            id="image-upload-input" name="post-image"
+                                                                            accept="image/jpeg, image/png, image/jpg">
+                                                                        <label type="button"
+                                                                            class="btn btn-primary btn-sm mb-2"
+                                                                            for="image-upload-input">Upload Image
                                                                         </label>
                                                                         <span id="upload-feedback"></span>
                                                                     </form>
-                                                                    <div class="d-flex flex-wrap mt-3" style="gap:1.5rem" id="image-list">
-                                                                    <?php
-                                                                    $fetch_media = "SELECT * FROM media";
-                                                                    $media_result = mysqli_query($conn, $fetch_media);
-                                                                    if (mysqli_num_rows($media_result) > 0) {
-                                                                        // output data of each row
-                                                                        while ($row = mysqli_fetch_assoc($media_result)) {
-                                                                            echo "<img src='/webcapz-capstone-project/dashboard-admin/php/" . $row['media_url'] . "' style='width:120px;height:120px' />";
+                                                                    <div class="d-flex flex-wrap mt-3"
+                                                                        style="gap:1.5rem" id="image-list">
+                                                                        <?php
+                                                                        $fetch_media = "SELECT * FROM media";
+                                                                        $media_result = mysqli_query($conn, $fetch_media);
+                                                                        if (mysqli_num_rows($media_result) > 0) {
+                                                                            // output data of each row
+                                                                            while ($row = mysqli_fetch_assoc($media_result)) {?>
+
+                                                                                <img src="/webcapz-capstone-project/dashboard-admin/php/<?php echo $row['media_url']?>" style="width:120px;height:120px;object-fit:cover" />
+                                                                                
+                                                                            <?php
+                                                                            }
                                                                         }
-                                                                    }
-                                                                    ?>
+                                                                        ?>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -122,7 +143,8 @@ $_SESSION['create_post_error_msg'] = ''; ?>
                                             </div>
                                         </div>
                                         <div>
-                                            <label for="exampleFormControlTextarea1" class="form-label">Categories*</label>
+                                            <label for="exampleFormControlTextarea1"
+                                                class="form-label">Categories*</label>
                                             <div id="categories-list">
                                                 <?php
                                                 $fetch_categories = "SELECT * FROM categories";
@@ -144,9 +166,12 @@ $_SESSION['create_post_error_msg'] = ''; ?>
                                             </div>
                                             <!-- add new category -->
                                             <div class="mt-5">
-                                                <input type="text" class="form-control" id="new-category-field" placeholder="Category Name" name="new-category" aria-describedby="defaultFormControlHelp">
+                                                <input type="text" class="form-control" id="new-category-field"
+                                                    placeholder="Category Name" name="new-category"
+                                                    aria-describedby="defaultFormControlHelp">
 
-                                                <select class="form-select mt-2" name="parent-category" id="parent-category-field">
+                                                <select class="form-select mt-2" name="parent-category"
+                                                    id="parent-category-field">
                                                     <option value="1" selected>--No Parent--</option>
                                                     <?php
                                                     $fetch_categories = "SELECT * FROM categories";
@@ -160,7 +185,8 @@ $_SESSION['create_post_error_msg'] = ''; ?>
                                                     }
                                                     ?>
                                                 </select>
-                                                <div type="button" href="#" id="create-new-category" class="btn btn-outline-primary btn-sm mt-3">
+                                                <div type="button" href="#" id="create-new-category"
+                                                    class="btn btn-outline-primary btn-sm mt-3">
                                                     Add New Category
                                                 </div>
                                             </div>
@@ -176,95 +202,78 @@ $_SESSION['create_post_error_msg'] = ''; ?>
                     </div>
                 </div>
                 <!-- / Content -->
-<script>
-    const newCategoryField = document.querySelector('#new-category-field');
-    const parentCategoryField = document.querySelector('#parent-category-field');
-    const createCategoryButton = document.querySelector('#create-new-category');
-    const categoriesList = document.querySelector('#categories-list');
-    const imageUploadForm = document.querySelector('#image-upload-form');
-    const imageUploadInput = document.querySelector('#image-upload-input');
-    const imageUploadUrlInput = document.querySelector('#image-upload-url-input');
-    const imageList = document.querySelector('#image-list');
-    const uploadFeedback = document.querySelector('#upload-feedback');
-    const basicModal = document.querySelector('#basicModal');
+                <script>
+                    const newCategoryField = document.querySelector('#new-category-field');
+                    const parentCategoryField = document.querySelector('#parent-category-field');
+                    const createCategoryButton = document.querySelector('#create-new-category');
+                    const categoriesList = document.querySelector('#categories-list');
+                    const imageUploadForm = document.querySelector('#image-upload-form');
+                    const imageUploadInput = document.querySelector('#image-upload-input');
+                    const imageUploadUrlInput = document.querySelector('#image-upload-url-input');
+                    const postImage = document.querySelector('#post-image');
+                    const imageList = document.querySelector('#image-list');
+                    const basicModal = document.querySelector('#basicModal'); 
+                    const uploadFeedback = document.querySelector('#upload-feedback');
 
-    createCategoryButton.addEventListener('click', () => {
-        const newCategoryName = newCategoryField.value
-        const parentCategoryid = parentCategoryField.value
+                    createCategoryButton.addEventListener('click', () => {
+                        const newCategoryName = newCategoryField.value
+                        const parentCategoryid = parentCategoryField.value
 
-        fetch(
-            `functions/categories-handler.php?new-category=${newCategoryName}&parent-category=${parentCategoryid}`
-        )
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data, newCategoryName, parentCategoryid)
-                if (data.successful) {
-                    categoriesList.innerHTML += `
+                        fetch(
+                            `functions/categories-handler.php?new-category=${newCategoryName}&parent-category=${parentCategoryid}`
+                        )
+                            .then((response) => response.json())
+                            .then((data) => {
+                                console.log(data, newCategoryName, parentCategoryid)
+                                if (data.successful) {
+                                    categoriesList.innerHTML += `
             <div class='form-check mt-3'>
             <input class='form-check-input' type='checkbox' value="${data.new_category_id}" id='defaultCheck1' name='category' form='create-post-form'>
 
             <label class='form-check-label' for='defaultCheck1'>${newCategoryName}</label>
             </div>`;
-                    parentCategoryField.innerHTML += `<option value="${data.new_category_id}">${newCategoryName}</option>`;
-                }
-            });
-
-
-        // fetch post method equivalent
-
-        // fetch(
-        // `functions/categories-handler.php`,
-        // {
-        // method: 'POST',
-        // headers: {
-        //   'Accept': 'application/json',
-        //   'Content-Type': 'application/json'
-        // },
-        // body:JSON.stringify({"new-category":newCategoryName,"parent-category":parentCategoryid})
-        // }
-        // )
-        // .then((response) => response.json())
-        // .then((data) => console.log(data));
-
-
-    })
-    // upload image
-    imageUploadInput.addEventListener('change', event => {
-        const formData = new FormData()
-        for (const file of event.target.files) {
-            formData.append('files[]', file)
-        }
-        fetch('functions/image-upload-handler.php', {
-            method: 'POST',
-            body: formData
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.successful) {
-                    uploadFeedback.innerHTML = data.message
-                    uploadFeedback.className = "text-success";
-                    imageList.innerHTML += `
-                <img src="/webcapz-capstone-project/dashboard-admin/php/${data.image_path}" style="width:120px;height:120px" />
+                                    parentCategoryField.innerHTML += `<option value="${data.new_category_id}">${newCategoryName}</option>`;
+                                }
+                            });
+                            
+                    })
+                    // upload image
+                    imageUploadInput.addEventListener('change', event => {
+                        const formData = new FormData()
+                        for (const file of event.target.files) {
+                            formData.append('images[]', file)
+                        }
+                        fetch('functions/image-upload-handler.php', {
+                            method: 'POST',
+                            body: formData
+                        })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                if (data.successful) {
+                                    uploadFeedback.innerHTML = data.message
+                                    uploadFeedback.className = "text-success";
+                                    imageList.innerHTML += `
+                <img src="/webcapz-capstone-project/dashboard-admin/php/${data.image_path}" style="width:120px;height:120px;object-fit:cover" />
                 `
+                                    attachImageUrlUpdateFxn()
+                                } else {
+                                    uploadFeedback.innerHTML = data.message
+                                    uploadFeedback.className = "text-danger";
+                                }
+                                console.log(data)
+                            });
+                    });
+                    function attachImageUrlUpdateFxn() {
+                        const images = document.querySelectorAll('#image-list img');
+                        images.forEach(image => {
+                            image.addEventListener('click', (event) => {
+                                const imgSrc = event.target.src
+                                imageUploadUrlInput.value = imgSrc;
+                                basicModal.click()
+                                postImage.src = imgSrc;
+                            })
+                        })
+                    }
                     attachImageUrlUpdateFxn()
-                } else {
-                    uploadFeedback.innerHTML = data.message
-                    uploadFeedback.className = "text-danger";
-                }
-                console.log(data)
-            });
-    });
-    function attachImageUrlUpdateFxn() {
-        const images = document.querySelectorAll('#image-list img');
-        images.forEach(image => {
-            image.addEventListener('click', (event) => {
-                const imgSrc = event.target.src
-                console.dir(imgSrc)
-                imageUploadUrlInput.value = imgSrc;
-                basicModal.click()
-            })
-        })
-    }
-    attachImageUrlUpdateFxn()
-</script>
+                </script>
                 <?php require('footer.php') ?>

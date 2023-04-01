@@ -82,7 +82,7 @@ if (isset($_GET['id'])) {
                                                 required><?php echo $postObj['post_content'] ?? '' ?></textarea>
                                         </div>
                                         <input type="submit" name="submit-post" form="create-post-form"
-                                            class="btn btn-primary" value="Publish" />
+                                            class="btn btn-primary" value="Update" />
                                     </div>
                                 </div>
                             </div>
@@ -98,6 +98,11 @@ if (isset($_GET['id'])) {
                                                 id="image-upload-url-input" placeholder="Post Image URL"
                                                 name="post-image-url"
                                                 value="<?php echo $postObj['post_image_path'] ?? '' ?>" required>
+                                            <div>
+                                                <img id="post-image"
+                                                    src='<?php echo $postObj['post_image_path'] ?? '' ?>'
+                                                    style='width:120px;height:120px;object-fit:cover' />
+                                            </div>
                                             <div class="col-lg-4 col-md-6">
                                                 <div class="mt-3">
                                                     <!-- Button trigger modal -->
@@ -131,7 +136,7 @@ if (isset($_GET['id'])) {
                                                                         </label>
                                                                         <span id="upload-feedback"></span>
                                                                     </form>
-                                                                    <div class="d-flex flex-wrap mt-3"
+                                                                    <div class=" d-flex flex-wrap mt-3"
                                                                         style="gap:1.5rem" id="image-list">
                                                                         <?php
                                                                         $fetch_media = "SELECT * FROM media";
@@ -139,7 +144,7 @@ if (isset($_GET['id'])) {
                                                                         if (mysqli_num_rows($media_result) > 0) {
                                                                             // output data of each row
                                                                             while ($row = mysqli_fetch_assoc($media_result)) {
-                                                                                echo "<img src='/webcapz-capstone-project/dashboard-admin/php/" . $row['media_url'] . "' style='width:120px;height:120px' />";
+                                                                                echo "<img src='/webcapz-capstone-project/dashboard-admin/php/" . $row['media_url'] . "' style='width:120px;height:120px;object-fit:cover' />";
                                                                             }
                                                                         }
                                                                         ?>
@@ -224,6 +229,7 @@ if (isset($_GET['id'])) {
                     const imageUploadForm = document.querySelector('#image-upload-form');
                     const imageUploadInput = document.querySelector('#image-upload-input');
                     const imageUploadUrlInput = document.querySelector('#image-upload-url-input');
+                    const postImage = document.querySelector('#post-image');
                     const imageList = document.querySelector('#image-list');
                     const uploadFeedback = document.querySelector('#upload-feedback');
                     const basicModal = document.querySelector('#basicModal');
@@ -272,7 +278,7 @@ if (isset($_GET['id'])) {
                     imageUploadInput.addEventListener('change', event => {
                         const formData = new FormData()
                         for (const file of event.target.files) {
-                            formData.append('files[]', file)
+                            formData.append('images[]', file)
                         }
                         fetch('functions/image-upload-handler.php', {
                             method: 'POST',
@@ -284,7 +290,7 @@ if (isset($_GET['id'])) {
                                     uploadFeedback.innerHTML = data.message
                                     uploadFeedback.className = "text-success";
                                     imageList.innerHTML += `
-                <img src="/webcapz-capstone-project/dashboard-admin/php/${data.image_path}" style="width:120px;height:120px" />
+                <img src="/webcapz-capstone-project/dashboard-admin/php/${data.image_path}" style="width:120px;height:120px;object-fit:cover" />
                 `
                                     attachImageUrlUpdateFxn()
                                 } else {
@@ -302,6 +308,7 @@ if (isset($_GET['id'])) {
                                 console.dir(imgSrc)
                                 imageUploadUrlInput.value = imgSrc;
                                 basicModal.click()
+                                postImage.src = imgSrc;
                             })
                         })
                     }

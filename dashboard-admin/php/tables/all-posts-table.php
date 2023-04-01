@@ -52,8 +52,7 @@
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <?php
+                    <?php
                 }
                 ?>
             </tbody>

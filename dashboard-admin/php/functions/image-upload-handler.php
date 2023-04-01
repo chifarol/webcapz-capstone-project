@@ -3,11 +3,11 @@ header('Content-Type: application/json');
 
 require_once('../db.php');
 if (
-    $_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES['files'])
+    $_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES['images'])
 ) {
     $message = "";
     $uploadOk = true;
-    $image_data = $_FILES['files'];
+    $image_data = $_FILES['images'];
     $target_dir = "../uploads/";
     // file path to use
     $target_file = $target_dir . basename($image_data["name"][0]);
