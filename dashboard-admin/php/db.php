@@ -1,4 +1,7 @@
 <?php
+if ($_SESSION['is_admin'] !== true) {
+    header('Location: /webcapz-capstone-project/dashboard-admin/php/login.php');
+}
 $servername = "localhost";
 $username = "root";
 $password = "";

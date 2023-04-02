@@ -97,7 +97,7 @@ if (isset($_GET['id'])) {
                                             <input form="create-post-form" type="text" class="form-control mb-2"
                                                 id="image-upload-url-input" placeholder="Post Image URL"
                                                 name="post-image-url"
-                                                value="<?php echo $postObj['post_image_path'] ?? '' ?>" required>
+                                                value="<?php echo $postObj['post_image_path'] ?? '' ?>">
                                             <div>
                                                 <img id="post-image"
                                                     src='<?php echo $postObj['post_image_path'] ?? '' ?>'
@@ -309,6 +309,7 @@ if (isset($_GET['id'])) {
                                 imageUploadUrlInput.value = imgSrc;
                                 basicModal.click()
                                 postImage.src = imgSrc;
+                                console.dir(imageUploadUrlInput.value)
                             })
                         })
                     }
