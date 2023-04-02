@@ -128,7 +128,7 @@ $_SESSION['create_post_error_msg'] = ''; ?>
                                                                             // output data of each row
                                                                             while ($row = mysqli_fetch_assoc($media_result)) {?>
 
-                                                                                <img src="/webcapz-capstone-project/dashboard-admin/php/<?php echo $row['media_url']?>" style="width:120px;height:120px;object-fit:cover" />
+                                                                                <img src="/webcapz-capstone-project/dashboard-admin/php/<?php echo $row['media_url']?>" style="width:120px;height:120px;object-fit:cover;cursor:pointer" />
                                                                                 
                                                                             <?php
                                                                             }
@@ -253,7 +253,7 @@ $_SESSION['create_post_error_msg'] = ''; ?>
                                     uploadFeedback.innerHTML = data.message
                                     uploadFeedback.className = "text-success";
                                     imageList.innerHTML += `
-                <img src="/webcapz-capstone-project/dashboard-admin/php/${data.image_path}" style="width:120px;height:120px;object-fit:cover" />
+                <img src="/webcapz-capstone-project/dashboard-admin/php/${data.image_path}" style="width:120px;height:120px;object-fit:cover;cursor:pointer" />
                 `
                                     attachImageUrlUpdateFxn()
                                 } else {

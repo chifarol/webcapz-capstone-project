@@ -1,6 +1,24 @@
 <?php require_once('parts/header.php') ?>
 <!-- Start Header -->
 <?php require_once('parts/nav.php') ?>
+<!-- chifarol: Fetch categories from database -->
+<?php
+if (isset($_GET['id'])) {
+    $category_id = $_GET['id'];
+    $fetch_posts = "SELECT * FROM categories WHERE id=$category_id";
+    $result = mysqli_query($conn, $fetch_posts);
+
+    if (mysqli_num_rows($result) > 0) {
+        $category = mysqli_fetch_assoc($result);
+    }else{
+        $URL = "/webcapz-capstone-project/blog/404.php";
+        echo("<script>location.href='$URL'</script>");
+
+    }
+}
+?>
+<!-- chifarol: End Fetch categories from database -->
+
 <!-- Start Header -->
 <div class="axil-breadcrumb-area breadcrumb-style-1 bg-color-grey">
     <div class="container">
@@ -8,7 +26,7 @@
             <div class="col-lg-12">
                 <div class="inner">
                     <h1 class="page-title">
-                        Blog </h1>
+                        Category: <?php echo $category['category_name'] ?> </h1>
                 </div>
             </div>
         </div>
@@ -23,80 +41,64 @@
             <div class="row">
                 <div class="col-lg-8 col-md-12 col-12 order-1 order-lg-2">
                     <!-- Start Post List  -->
-                    <!-- chifarol: Fetch all posts from database  -->
+                    
+                    <!-- chifarol: Fetch posts from database -->
                     <?php
+                    $_SESSION['fetch_category_posts_msg'] = '';
                     global $conn;
-                    $_SESSION['fetch_posts_msg'] = '';
-                    $fetch_posts = "SELECT * FROM posts";
+                    $fetch_posts = "SELECT * FROM posts WHERE category_id=$category_id";
                     $result = mysqli_query($conn, $fetch_posts);
                     if (mysqli_num_rows($result) > 0) {
-                        while ($postObj = mysqli_fetch_assoc($result)) {
-                            $category_id = $postObj['category_id'];
-                            $fetch_category = "SELECT * FROM categories WHERE id=$category_id";
-                            $category_result = mysqli_query($conn, $fetch_category);
-                            $category['category_name'] = '';
-                            if ($category_result) {
-                                $category = mysqli_fetch_assoc($category_result);
-                            }
-                            ?>
+                    while ($postObj = mysqli_fetch_assoc($result)) {
+                        ?>
 
-                            <div id="<?php echo $postObj['id'] ?>"
-                                class="content-block post-list-view mt--30 post-662 post type-post status-publish format-standard has-post-thumbnail hentry category-careers">
-                                <div class="post-thumbnail">
-                                    <a href="post.php?id=<?php echo $postObj['id'] ?>">
-                                        <img width="295" height="250" src="<?php echo $postObj['post_image_path'] ?>"
-                                            class="attachment-axil-blog-thumb size-axil-blog-thumb wp-post-image"
-                                            alt="gallery-post-03" decoding="async" />
-                                    </a>
-                                </div>
-                                <div class="post-content">
-                                    <div class="post-cat">
-                                        <div class="post-cat-list">
-                                            <a class="hover-flip-item-wrapper"
-                                                href="/webcapz-capstone-project/blog/categories.php?id=<?php echo $category['id'] ?>">
-                                                <span class="hover-flip-item"><span
-                                                        data-text="<?php echo $category['category_name'] ?>">
-                                                        <?php echo $category['category_name'] ?>
-                                                    </span></span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <h4 class="title">
-                                        <a href="post.php?id=<?php echo $postObj['id'] ?>">
-                                            <?php echo $postObj['post_title'] ?>
+                        <div id="<?php echo $postObj['id'] ?>"
+                            class="content-block post-list-view mt--30 post-662 post type-post status-publish format-standard has-post-thumbnail hentry category-careers">
+                            <div class="post-thumbnail">
+                                <a href="post.php?id=<?php echo $postObj['id'] ?>">
+                                    <img width="295" height="250" src="<?php echo $postObj['post_image_path'] ?>"
+                                        class="attachment-axil-blog-thumb size-axil-blog-thumb wp-post-image"
+                                        alt="gallery-post-03" decoding="async" /> </a>
+                            </div>
+                            <div class="post-content">
+                                <div class="post-cat">
+                                    <div class="post-cat-list">
+                                        <a class="hover-flip-item-wrapper"
+                                            href="/webcapz-capstone-project/blog/categories.php?id=<?php echo $category['id'] ?>">
+                                            <span class="hover-flip-item"><span data-text="<?php echo $category['category_name'] ?>">
+                                                    <?php echo $category['category_name'] ?>
+                                                </span></span>
                                         </a>
-                                    </h4>
-                                    <div class="post-meta-wrapper">
-                                        <div class="post-meta">
-                                            <div class="content">
-                                                <h6 class="post-author-name">
-                                                    <a class="hover-flip-item-wrapper" href="#">
-                                                        <span class="hover-flip-item"><span data-text="Swiss Blog">Swiss Blog
-                                                            </span>
-                                                        </span>
-                                                    </a>
-                                                </h6>
-                                                <ul class="post-meta-list">
-                                                    <li class="post-meta-date">
-                                                        <?php echo $postObj['published_date'] ?>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                    </div>
+                                </div>
+                                <h4 class="title"><a
+                                        href="post.php?id=<?php echo $postObj['id'] ?>"><?php echo $postObj['post_title'] ?></a></h4>
+                                <div class="post-meta-wrapper">
+                                    <div class="post-meta">
+                                        <div class="content">
+                                            <h6 class="post-author-name">
+                                                <a class="hover-flip-item-wrapper" href="#"><span class="hover-flip-item"><span data-text="Swiss Blog">Swiss Blog</span></span></a></h6>
+                                            <ul class="post-meta-list">
+                                                <li class="post-meta-date">
+                                                    <?php echo $postObj['published_date'] ?>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <?php
-                        }
-                    } else {
-                        $_SESSION['fetch_posts_msg'] = 'No Posts published yet';
+                        <?php
                     }
+                }else{
+                    $_SESSION['fetch_category_posts_msg'] = 'No Posts Found';
+                }
                     ?>
                     <h4 class="title">
-                        <?php echo $_SESSION['fetch_posts_msg'] ?>
+                    <?php echo $_SESSION['fetch_category_posts_msg'] ?>
                     </h4>
-                    <!--  chifarol: Fetch all Posts from database  -->
+                    <!-- chifarol: End Fetch posts from database -->
                     <!-- End Post List  -->
                 </div>
                 <div class="col-lg-4 col-xl-4 mt_md--40 mt_sm--40 order-2 order-lg-2">
@@ -115,40 +117,42 @@
                     <div
                         class="blogar_recent_post-1 axil-single-widget widget_blogar_recent_post mt--30 mt_sm--30 mt_md--30">
                         <h5 class="widget-title">Recent Posts</h5>
-                        <!-- chifarol: Fetch the first four recent posts from database  -->
                         <?php
-                        global $conn;
-                        $fetch_recent_posts = "SELECT * FROM posts ORDER BY published_date DESC LIMIT 4";
-                        $result = mysqli_query($conn, $fetch_recent_posts);
+                    $_SESSION['get_all_post_error_msg'] = '';
+                    global $conn;
+                    $fetch_recent_posts = "SELECT * FROM posts ORDER BY published_date DESC LIMIT 4";
+                    $result = mysqli_query($conn, $fetch_recent_posts);
 
-                        while ($recentPostObj = mysqli_fetch_assoc($result)) {
-                            ?>
-                            <div class="content-block post-medium mb--20">
-                                <div class="post-thumbnail">
-                                    <a href="post.php?id=<?php echo $postObj['id'] ?>"><img width="150" height="150"
-                                            src="<?php echo $recentPostObj['post_image_path'] ?>"
-                                            class="attachment-thumbnail size-thumbnail wp-post-image" alt="gallery-post-03"
-                                            decoding="async" loading="lazy" sizes="(max-width: 150px) 100vw, 150px" /></a>
-                                </div>
-                                <div class="post-content">
-                                    <h6 class="title">
-                                        <a href="post.php?id=<?php echo $postObj['id'] ?>"><?php echo $recentPostObj['post_title'] ?></a>
-                                    </h6>
-                                    <div class="post-meta">
-                                        <ul class="post-meta-list">
-                                            <li>
-                                                <?php echo $recentPostObj['published_date'] ?>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-                        }
+                    while ($recentPostObj = mysqli_fetch_assoc($result)) {
                         ?>
 
-                        <!-- chifarol: Fetch the first four recent posts from database  -->
-                    </div>
+                        
+                        <div class="content-block post-medium mb--20">
+                            <div class="post-thumbnail">
+                                <a
+                                    href="post.php?id=<?php echo $postObj['id'] ?>"><img
+                                        width="150" height="150"
+                                        src="<?php echo $recentPostObj['post_image_path'] ?>"
+                                        class="attachment-thumbnail size-thumbnail wp-post-image" alt="gallery-post-03"
+                                        decoding="async" loading="lazy"
+                                        sizes="(max-width: 150px) 100vw, 150px" /></a>
+                            </div>
+                            <div class="post-content">
+                                <h6 class="title">
+                                    <a href="post.php?id=<?php echo $postObj['id'] ?>"><?php echo $recentPostObj['post_title'] ?></a></h6>
+                                <div class="post-meta">
+                                    <ul class="post-meta-list">
+                                        <li><?php echo $recentPostObj['published_date'] ?></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        
+
+                        <?php
+                    }
+                    ?></div>
                     <div
                         class="mc4wp_form_widget-1 axil-single-widget widget_mc4wp_form_widget mt--30 mt_sm--30 mt_md--30">
                         <script>(function () {
@@ -226,25 +230,19 @@
                     <div class="tag_cloud-1 axil-single-widget widget_tag_cloud mt--30 mt_sm--30 mt_md--30">
                         <h5 class="widget-title">All Categories </h5>
                         <div class="tagcloud">
-                            <!-- chifarol: Fetch all categories from database  -->
-                            <?php
-                            global $conn;
-                            $fetch_categories = "SELECT * FROM categories";
-                            $categories_result = mysqli_query($conn, $fetch_categories);
-
-                            while ($category = mysqli_fetch_assoc($categories_result)) {
-                                ?>
-                                <a href="/webcapz-capstone-project/blog/categories.php?id=<?php echo $category['id'] ?>"
-                                    class="tag-cloud-link tag-link-45 tag-link-position-1" style="font-size: 8pt;"
-                                    aria-label="Design (1 item)">
-                                    <?php echo $category['category_name'] ?>
-                                </a>
-
                                 <?php
-                            }
-                            ?>
+                    $_SESSION['get_all_post_error_msg'] = '';
+                    global $conn;
+                    $fetch_categories = "SELECT * FROM categories";
+                    $categories_result = mysqli_query($conn, $fetch_categories);
 
-                            <!-- chifarol: End Fetch all categories from database  -->
+                    while ($category = mysqli_fetch_assoc($categories_result)) {
+                        ?>
+                        <a href="#" class="tag-cloud-link tag-link-45 tag-link-position-1" style="font-size: 8pt;" aria-label="Design (1 item)"><?php echo $category['category_name'] ?></a>
+
+                        <?php
+                    }
+                    ?>
                         </div>
                     </div>
                 </div>

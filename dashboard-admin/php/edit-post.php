@@ -144,7 +144,7 @@ if (isset($_GET['id'])) {
                                                                         if (mysqli_num_rows($media_result) > 0) {
                                                                             // output data of each row
                                                                             while ($row = mysqli_fetch_assoc($media_result)) {
-                                                                                echo "<img src='/webcapz-capstone-project/dashboard-admin/php/" . $row['media_url'] . "' style='width:120px;height:120px;object-fit:cover' />";
+                                                                                echo "<img src='/webcapz-capstone-project/dashboard-admin/php/" . $row['media_url'] . "' style='width:120px;height:120px;object-fit:cover;cursor:pointer' />";
                                                                             }
                                                                         }
                                                                         ?>
@@ -290,7 +290,7 @@ if (isset($_GET['id'])) {
                                     uploadFeedback.innerHTML = data.message
                                     uploadFeedback.className = "text-success";
                                     imageList.innerHTML += `
-                <img src="/webcapz-capstone-project/dashboard-admin/php/${data.image_path}" style="width:120px;height:120px;object-fit:cover" />
+                <img src="/webcapz-capstone-project/dashboard-admin/php/${data.image_path}" style="width:120px;height:120px;object-fit:cover;cursor:pointer" />
                 `
                                     attachImageUrlUpdateFxn()
                                 } else {

@@ -139,3 +139,5 @@
 <script type='text/javascript'
     src='https://new.axilthemes.com/themes/blogar/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.10.1'
     id='elementor-frontend-js'></script>
+
+<script src="https://unpkg.com/@phosphor-icons/web"></script>

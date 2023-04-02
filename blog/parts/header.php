@@ -15,6 +15,7 @@
         </style>
     </noscript>
     <link rel='dns-prefetch' href='//fonts.googleapis.com' />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <link rel="alternate" type="application/rss+xml" title="Blogar &raquo; Feed"
         href="https://new.axilthemes.com/themes/blogar/feed/" />
     <link rel="alternate" type="application/rss+xml" title="Blogar &raquo; Comments Feed"
@@ -3937,3 +3938,4 @@ We use it here to ensure columns blocks display well across themes.
         </ul>
     </div>
     <div class="main-content">
+    <?php require_once('./db.php') ?>
