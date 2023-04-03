@@ -1,4 +1,5 @@
 <?php
+session_start();
 if ($_SESSION['is_admin'] !== true) {
     header('Location: /webcapz-capstone-project/dashboard-admin/php/login.php');
 }

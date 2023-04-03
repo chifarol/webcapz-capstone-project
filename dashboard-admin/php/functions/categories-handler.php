@@ -26,42 +26,42 @@ if (
             );
 
             /* Set the parameters values and execute
-    the statement again to insert another row */
+            the statement again to insert another row */
             $new_category = $_GET['new-category'];
             $parent_category = $_GET['parent-category'];
-            if(empty($parent_category)){
+            if (empty($parent_category)) {
                 $parent_category = 0;
             }
 
             if (empty($new_category)) {
-            $response = [
-                "successful" => false,
-                "message" => "couldn't create new category - required fields missing"
-            ];
+                $response = [
+                    "successful" => false,
+                    "message" => "couldn't create new category - required fields missing"
+                ];
                 echo json_encode($response);
                 return;
             }
             $result = mysqli_stmt_execute($stmt);
-            if($result){
+            if ($result) {
                 $last_id = mysqli_insert_id($conn);
                 $response = [
-                "successful" => true,
-                "message"=>"new category created",
-                "new_category_id"=>$last_id
+                    "successful" => true,
+                    "message" => "new category created",
+                    "new_category_id" => $last_id
                 ];
                 echo json_encode($response);
-            }
-            else{
-                 $response = [
-                "successful" => false,
-                "message"=>"couldn't create new category"
-            ];
+            } else {
+                $response = [
+                    "successful" => false,
+                    "message" => "couldn't create new category"
+                ];
                 echo json_encode($response);
             }
         } else {
             $response = [
-            "successful" => false,
-            "message"=>"couldn't create new category"];
+                "successful" => false,
+                "message" => "couldn't create new category"
+            ];
             echo json_encode($response);
         }
 
