@@ -85,7 +85,7 @@ $_SESSION['create_post_error_msg'] = ''; ?>
                                                 name="post-image-url" aria-describedby="defaultFormControlHelp"
                                                 required>
                                             <div>
-                                                <img id="post-image" src=''
+                                                <img id="post-image" src='placeholder.png'
                                                     style='width:120px;height:120px;object-fit:cover' />
                                             </div>
                                             <div class="col-lg-4 col-md-6">
