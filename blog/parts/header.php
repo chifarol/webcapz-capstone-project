@@ -1,3 +1,5 @@
+
+<?php require_once('./db.php') ?>
 <!doctype html>
 <html lang="en-US">
 
@@ -3938,4 +3940,3 @@ We use it here to ensure columns blocks display well across themes.
         </ul>
     </div>
     <div class="main-content">
-    <?php require_once('./db.php') ?>
