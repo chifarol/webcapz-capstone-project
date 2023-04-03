@@ -27,8 +27,8 @@ if (
 
             /* Set the parameters values and execute
             the statement again to insert another row */
-            $new_category = $_GET['new-category'];
-            $parent_category = $_GET['parent-category'];
+            $new_category = sanitize_input($_GET['new-category']);
+            $parent_category = sanitize_input($_GET['parent-category']);
             if (empty($parent_category)) {
                 $parent_category = 0;
             }

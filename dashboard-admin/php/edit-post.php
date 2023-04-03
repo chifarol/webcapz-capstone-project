@@ -2,7 +2,7 @@
 <?php
 $_SESSION['edit_post_error_msg'] = '';
 if (isset($_GET['id'])) {
-    $post_id = $_GET['id'];
+    $post_id = sanitize_input($_GET['id']);
     $fetch_posts = "SELECT * FROM posts WHERE id=$post_id";
     $result = mysqli_query($conn, $fetch_posts);
 

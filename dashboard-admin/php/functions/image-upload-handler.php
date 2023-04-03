@@ -53,7 +53,7 @@ if (
     try {
         $uploadOk = true;
         $upload_path = $target_dir . $target_name;
-        $media_url = 'uploads/' . $target_name;
+        $media_url = sanitize_input('uploads/' . $target_name);
         $media_type = "image";
         move_uploaded_file($target_tmp_name, $upload_path);
         $insert_media = "INSERT INTO media (

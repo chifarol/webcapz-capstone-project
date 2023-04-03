@@ -133,8 +133,7 @@
                             ?>
                             <li
                                 class="menu-item menu-item-type-post_type menu-item-object-post menu-item-429 axil-post-type-post">
-                                <a
-                                    href="https://new.axilthemes.com/themes/blogar/apple-reimagines-the-iphone-experience-with-ios-14/">
+                                <a href="/webcapz-capstone-project/blog/categories.php?id=<?php echo $category['id'] ?>">
                                     <?php echo $category['category_name'] ?>
 
                                 </a>

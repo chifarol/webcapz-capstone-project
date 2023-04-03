@@ -4,7 +4,7 @@
 <!-- chifarol: Fetch categories from database -->
 <?php
 if (isset($_GET['id'])) {
-    $category_id = $_GET['id'];
+    $category_id = sanitize_input($_GET['id']);
     $fetch_posts = "SELECT * FROM categories WHERE id=$category_id";
     $result = mysqli_query($conn, $fetch_posts);
 

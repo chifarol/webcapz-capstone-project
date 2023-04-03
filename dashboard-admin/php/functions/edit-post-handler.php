@@ -35,11 +35,11 @@ if (
 
             /* Set the parameters values and execute
             the statement again to insert another row */
-            $post_title = $_POST['post-title'];
-            $post_content = $_POST['post-content'];
-            $post_image = $_POST['post-image-url'];
-            $post_category = intval($_POST['category']);
-            $id = intval($_POST['post_id']);
+            $post_title = sanitize_input($_POST['post-title']);
+            $post_content = sanitize_input($_POST['post-content']);
+            $post_image = sanitize_input($_POST['post-image-url']);
+            $post_category = sanitize_input(intval($_POST['category']));
+            $id = sanitize_input(intval($_POST['post_id']));
             if (empty($post_title) || empty($post_content) || empty($post_image)) {
                 $_SESSION['edit_post_error_msg'] = "some required fields are missing";
                 return;
