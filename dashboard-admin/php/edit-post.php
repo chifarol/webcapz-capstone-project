@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
         <div class="layout-container">
             <!-- Menu -->
 
-            <?php require('sidebar.php') ?>
+            <?php require('parts/sidebar.php') ?>
             <!-- / Menu -->
 
             <!-- Layout container -->
@@ -318,4 +318,4 @@ if (isset($_GET['id'])) {
                     }
                     attachImageUrlUpdateFxn()
                 </script>
-                <?php require('footer.php') ?>
+                <?php require('parts/footer.php') ?>

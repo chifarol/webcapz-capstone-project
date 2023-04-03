@@ -8,7 +8,7 @@ $_SESSION['create_post_error_msg'] = ''; ?>
         <div class="layout-container">
             <!-- Menu -->
 
-            <?php require('sidebar.php') ?>
+            <?php require('parts/sidebar.php') ?>
             <!-- / Menu -->
 
             <!-- Layout container -->
@@ -276,4 +276,4 @@ $_SESSION['create_post_error_msg'] = ''; ?>
                     }
                     attachImageUrlUpdateFxn()
                 </script>
-                <?php require('footer.php') ?>
+                <?php require('parts/footer.php') ?>
