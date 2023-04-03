@@ -74,8 +74,8 @@ if (isset($_GET['id'])) {
                                     <div class="post-meta">
                                         <div class="post-author-avatar border-rounded">
                                             <img alt='' src='/webcapz-capstone-project/blog/avatar/your-avatar.png'
-                                                class='avatar avatar-50 photo' style="height:50px" loading='lazy'
-                                                decoding='async' />
+                                                class='avatar avatar-50 photo' style="height:50px;width:50px"
+                                                loading='lazy' decoding='async' />
                                         </div>
                                         <div class="content">
                                             <h6 class="post-author-name"><a class="hover-flip-item-wrapper"
