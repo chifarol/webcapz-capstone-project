@@ -56,7 +56,7 @@ if (isset($_GET['id'])) {
                                 <div class="post-cat">
                                     <div class="post-cat-list">
                                         <a class="hover-flip-item-wrapper"
-                                            href="https://new.axilthemes.com/themes/blogar/category/featured-post/">
+                                            href="categories.php?id=<?php echo $category['id'] ?>">
                                             <span class="hover-flip-item"><span data-text="Featured Post">
                                                     <?php echo $category['category_name'] ?>
                                                 </span></span>
@@ -113,7 +113,7 @@ if (isset($_GET['id'])) {
                                 <li class="item-home"><a class="bread-link bread-home" href="#" title="Home">Home</a>
                                 </li>
                                 <li class="separator separator-home"> </li>
-                                <li class="item-cat"><a href="#/">
+                                <li class="item-cat"><a href="categories.php?id=<?php echo $category['id'] ?>">
                                         <?php echo $category['category_name'] ?>
                                     </a></li>
                                 <li class="separator"> </li>

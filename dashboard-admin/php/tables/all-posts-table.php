@@ -39,7 +39,9 @@
                                     <i class="bx bx-dots-vertical-rounded"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bxs-show me-1"></i>
+                                    <a class="dropdown-item" target="__blank"
+                                        href="/webcapz-capstone-project/blog/post.php?id=<?php echo $postObj['id'] ?>"><i
+                                            class="bx bxs-show me-1"></i>
                                         View</a>
                                     <a class="dropdown-item" href="edit-post.php?id=<?php echo $postObj['id'] ?>"><i
                                             class="bx bx-edit-alt me-1"></i>
