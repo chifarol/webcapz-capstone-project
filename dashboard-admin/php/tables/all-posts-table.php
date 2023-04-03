@@ -6,7 +6,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
-                    <th>Categories</th>
+                    <th>Category</th>
                     <th>Date</th>
                     <th>Actions</th>
                 </tr>
@@ -18,7 +18,13 @@
                 $fetch_posts = "SELECT * FROM posts";
                 $result = mysqli_query($conn, $fetch_posts);
 
-                while ($postObj = mysqli_fetch_assoc($result)) { ?>
+                while ($postObj = mysqli_fetch_assoc($result)) {
+                    $category_id = $postObj['category_id'];
+                    $fetch_category = "SELECT * FROM categories WHERE id=$category_id";
+                    $category_result = mysqli_query($conn, $fetch_category);
+                    $category = mysqli_fetch_assoc($category_result)
+
+                        ?>
 
                     <tr>
                         <td>
@@ -28,7 +34,7 @@
                             <?php echo $postObj['post_title'] ?>
                         </td>
                         <td>
-                            <?php echo $postObj['category_id'] ?>
+                            <?php echo $category['category_name'] ?>
                         </td>
                         <td>
                             <?php echo $postObj['last_modified_date'] ?>

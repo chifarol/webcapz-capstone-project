@@ -129,17 +129,13 @@ if (isset($_GET['id'])) {
                         
                         <div class="content-block post-medium mb--20">
                             <div class="post-thumbnail">
-                                <a
-                                    href="post.php?id=<?php echo $postObj['id'] ?>"><img
-                                        width="150" height="150"
-                                        src="<?php echo $recentPostObj['post_image_path'] ?>"
-                                        class="attachment-thumbnail size-thumbnail wp-post-image" alt="gallery-post-03"
-                                        decoding="async" loading="lazy"
-                                        sizes="(max-width: 150px) 100vw, 150px" /></a>
+                                <a href="post.php?id=<?php echo $recentPostObj['id'] ?>">
+                                <img width="150" height="150" src="<?php echo $recentPostObj['post_image_path'] ?>" class="attachment-thumbnail size-thumbnail wp-post-image" alt="gallery-post-03" decoding="async" loading="lazy" sizes="(max-width: 150px) 100vw, 150px" />
+                                </a>
                             </div>
                             <div class="post-content">
                                 <h6 class="title">
-                                    <a href="post.php?id=<?php echo $postObj['id'] ?>"><?php echo $recentPostObj['post_title'] ?></a></h6>
+                                    <a href="post.php?id=<?php echo $recentPostObj['id'] ?>"><?php echo $recentPostObj['post_title'] ?></a></h6>
                                 <div class="post-meta">
                                     <ul class="post-meta-list">
                                         <li><?php echo $recentPostObj['published_date'] ?></li>
