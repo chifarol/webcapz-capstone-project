@@ -228,7 +228,7 @@ $_SESSION['create_post_error_msg'] = ''; ?>
                                 if (data.successful) {
                                     categoriesList.innerHTML += `
             <div class='form-check mt-3'>
-            <input class='form-check-input' type='checkbox' value="${data.new_category_id}" id='defaultCheck1' name='category' form='create-post-form'>
+            <input class='form-check-input' type='radio' value="${data.new_category_id}" id='defaultCheck1' name='category' form='create-post-form'>
 
             <label class='form-check-label' for='defaultCheck1'>${newCategoryName}</label>
             </div>`;
