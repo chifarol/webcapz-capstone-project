@@ -234,7 +234,7 @@ if (isset($_GET['id'])) {
 
                     while ($category = mysqli_fetch_assoc($categories_result)) {
                         ?>
-                        <a href="#" class="tag-cloud-link tag-link-45 tag-link-position-1" style="font-size: 8pt;" aria-label="Design (1 item)"><?php echo $category['category_name'] ?></a>
+                        <a href="/webcapz-capstone-project/blog/categories.php?id=<?php echo $category['id'] ?>" class="tag-cloud-link tag-link-45 tag-link-position-1" style="font-size: 8pt;" aria-label="Design (1 item)"><?php echo $category['category_name'] ?></a>
 
                         <?php
                     }

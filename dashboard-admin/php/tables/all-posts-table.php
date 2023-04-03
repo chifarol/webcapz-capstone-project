@@ -1,5 +1,5 @@
 <div class="card">
-    <h5 class="card-header">Table Basic</h5>
+    <h5 class="card-header">All Posts</h5>
     <div class="table-responsive text-nowrap">
         <table class="table">
             <thead>
