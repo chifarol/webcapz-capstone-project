@@ -20,10 +20,10 @@ if (is_session_started() === FALSE) {
 if ($_SESSION['is_admin'] !== true) {
     header('Location: /webcapz-capstone-project/dashboard-admin/php/login.php');
 }
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "swiss_blog";
+$servername = $_SERVER['HTTP_HOST'] != "localhost" ? "sql104.byethost6.com" : "localhost";
+$username = $_SERVER['HTTP_HOST'] != "localhost" ? "b6_33489148" : "root";
+$password = $_SERVER['HTTP_HOST'] != "localhost" ? "65393180fa" : "";
+$dbname = $_SERVER['HTTP_HOST'] != "localhost" ? "b6_33489148_swiss_blog" : "swiss_blog";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -35,8 +35,8 @@ if (!$conn) {
 $create_table = "CREATE TABLE IF NOT EXISTS posts (
     id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     post_title VARCHAR(100) NOT NULL,
-    post_content TEXT(30) NOT NULL,
-    post_image_path VARCHAR(100) NOT NULL,
+    post_content TEXT NOT NULL,
+    post_image_path VARCHAR(255) NOT NULL,
     category_id INT(2) DEFAULT 0,
     published_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_modified_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -60,7 +60,7 @@ if (mysqli_query($conn, $create_categories)) {
 }
 $create_media = "CREATE TABLE IF NOT EXISTS media (
     id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    media_url VARCHAR(255) NOT NULL UNIQUE,
+    media_url TEXT NOT NULL UNIQUE,
     media_type VARCHAR(15),
     published_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )";
